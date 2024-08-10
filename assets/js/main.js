@@ -154,4 +154,38 @@ $(document).ready(function() {
     })
 
 
+    $("#eliminar-ultimo").click(function() {
+        if(colaboradores.length == 0) {
+            return alert("No es posible eliminar, ya que no hay colaboradores registrados")
+        }
+        // Función para eliminar el último elemento de un arreglo
+        var eliminado = colaboradores.pop()
+        alert(`Ha eliminado el colaborador ${eliminado.nombre}`)
+        listarColaboradores(colaboradores)
+    })
+
+    $("#eliminar-primero").click(function() {
+        if(colaboradores.length == 0) {
+            return alert("No es posible eliminar, ya que no hay colaboradores registrados")
+        }
+
+        // Función para eliminar el primer elemento de un arreglo
+        var eliminado = colaboradores.shift()
+        alert(`Ha eliminado el colaborador ${eliminado.nombre}`)
+        listarColaboradores(colaboradores)
+    })
+
+    $("#txt-busqueda").keyup(function() {
+        var busqueda = $("#txt-busqueda").val().toLowerCase()
+        var filtrados = colaboradores.filter(item => {
+            if(
+                item.nombre.toLowerCase().includes(busqueda) || 
+                item.rut.includes(busqueda) ||
+                item.departamento.toLowerCase().includes(busqueda)
+            ) {
+                return true
+            }
+        })
+        listarColaboradores(filtrados)
+    })
 })
